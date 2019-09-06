@@ -1,4 +1,4 @@
-package com.java.lambda.model;
+package com.java.lambda;
 
 public class Usuario {
 	private String nome;
