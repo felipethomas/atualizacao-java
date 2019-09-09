@@ -11,8 +11,8 @@ local.properties
 .recommenders
 
 # Sub folders
-**/.classpath
-**/.project
+# **/.classpath
+# **/.project
 
 # External tool builders
 .externalToolBuilders/
