@@ -4,6 +4,15 @@ public class Usuario {
 	private String nome;
 	private int pontos;
 	private boolean moderador;
+	
+	public Usuario() {
+		this.moderador = false;
+	}
+	
+	public Usuario(String nome) {
+		this.nome = nome;
+		this.moderador = false;
+	}
 
 	public Usuario(String nome, int pontos) {
 		this.pontos = pontos;
@@ -25,5 +34,9 @@ public class Usuario {
 
 	public boolean isModerador() {
 		return moderador;
+	}
+
+	public String toString() {
+		return "Usuario " + nome;
 	}
 }
