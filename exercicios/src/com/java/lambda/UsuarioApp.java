@@ -9,7 +9,21 @@ public class UsuarioApp {
 	public static void main(String... args) {
 		UsuarioApp app = new UsuarioApp();
 
-		app.ex9();
+		app.ex11();
+	}
+	
+	void ex11() {
+		Usuario rodrigo = new Usuario("Rodrigo Turini", 50);
+		Runnable bloco = rodrigo::tornaModerador;
+		
+		bloco.run();
+	}
+	
+	void ex10() {
+		List<Usuario> usuarios = ex();
+		
+		usuarios.forEach(Usuario::tornaModerador);
+		usuarios.forEach(u -> System.out.println(u.isModerador()));
 	}
 	
 	void ex9() {

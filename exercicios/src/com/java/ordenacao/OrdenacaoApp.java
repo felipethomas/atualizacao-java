@@ -1,20 +1,74 @@
 package com.java.ordenacao;
 
-import java.util.Arrays;
+import static java.util.Comparator.comparing;
+import static java.util.Comparator.comparingInt;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Function;
 
 import com.java.lambda.Usuario;
-import static java.util.Comparator.comparing;
-import static java.util.Comparator.comparingInt;
 
 public class OrdenacaoApp {
 
 	public static void main(String[] args) {
 		OrdenacaoApp app = new OrdenacaoApp();
-		app.ex10();
+		app.ex16();
+	}
+	
+	void ex16() {
+		List<Usuario> usuarios = ex();
+		
+		usuarios.sort(comparing(Usuario::getPontos).reversed());
+		
+		usuarios.forEach(u -> System.out.println(u.getPontos()));
+	}
+	
+	void ex15() {
+		List<Usuario> usuarios = ex();
+		
+		usuarios.sort(Comparator.nullsLast(
+			comparing(Usuario::getNome)));
+		
+		usuarios.forEach(u -> System.out.println(u.getNome()));
+	}
+	
+	void ex14() {
+		List<Usuario> usuarios = ex();
+		
+		usuarios.sort(Comparator
+				.comparingInt(Usuario::getPontos)
+				.thenComparing(Usuario::getNome));
+		
+		usuarios.forEach(u -> System.out.println(u.getPontos()));
+	}
+	
+	void ex13() {
+		Comparator<Usuario> comparador = Comparator
+			.comparingInt(Usuario::getPontos)
+			.thenComparing(Usuario::getNome);
+		
+		List<Usuario> usuarios = ex();
+		
+		usuarios.sort(comparador);
+		usuarios.forEach(u -> System.out.println(u.getPontos()));
+	}
+	
+	void ex12() {
+		List<Usuario> usuarios = ex();
+		Function<Usuario, String> byName = Usuario::getNome;
+		
+		usuarios.sort(comparing(byName));
+		usuarios.forEach(u -> System.out.println(u.getNome()));
+	}
+	
+	void ex11() {
+		List<Usuario> usuarios = ex();
+
+		usuarios.sort(comparing(Usuario::getPontos));
+		usuarios.forEach(u -> System.out.println(u.getPontos()));
 	}
 	
 	void ex10() {
