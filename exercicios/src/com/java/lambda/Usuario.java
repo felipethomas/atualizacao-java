@@ -36,7 +36,8 @@ public class Usuario {
 		return moderador;
 	}
 
+	@Override
 	public String toString() {
-		return "Usuario " + nome;
+		return "Nome=" + nome + ",\t pontos=" + pontos + ",\t moderador=" + moderador;
 	}
 }
