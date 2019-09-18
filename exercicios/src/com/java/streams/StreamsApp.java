@@ -18,7 +18,16 @@ public class StreamsApp {
 	public static void main(String[] args) {
 		Supplier<StreamsApp> criadorDeApps = StreamsApp::new;
 		StreamsApp app = criadorDeApps.get();
-		app.ex16();
+		app.ex17();
+	}
+	
+	void ex17() {
+		List<Usuario> usuarios = ex();
+		
+		usuarios.stream()
+			.filter(u -> u.getPontos() > 100)
+			.sorted(Comparator.comparing(Usuario::getNome))
+			.forEach(System.out::println);
 	}
 	
 	void ex16() {
