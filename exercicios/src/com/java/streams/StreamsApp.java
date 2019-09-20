@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.IntBinaryOperator;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,7 +19,80 @@ public class StreamsApp {
 	public static void main(String[] args) {
 		Supplier<StreamsApp> criadorDeApps = StreamsApp::new;
 		StreamsApp app = criadorDeApps.get();
-		app.ex17();
+		app.ex24();
+	}
+	
+	void ex24() {
+		List<Usuario> usuarios = ex();
+		
+		int total = usuarios.stream()
+			.mapToInt(Usuario::getPontos)
+			.reduce(1, (a,b) -> a * b);
+		
+		System.out.println(total);
+	}
+	
+	void ex23() {
+		List<Usuario> usuarios = ex();
+		
+		int valorInicial = 0;
+		IntBinaryOperator operacao = (a, b) -> a + b;
+		
+		int total = usuarios.stream()
+			.mapToInt(Usuario::getPontos)
+			.reduce(valorInicial, operacao); //reduce(0, Integer::sum);
+		
+		System.out.println(total);
+	}
+	
+	void ex22() {
+		List<Usuario> usuarios = ex();
+
+		int total = usuarios.stream()
+			.mapToInt(Usuario::getPontos)
+			.sum();
+		
+		System.out.println(total);
+	}
+	
+	void ex21() {
+		List<Usuario> usuarios = ex();
+
+		Optional<Usuario> max = usuarios
+				.stream()
+				.max(Comparator.comparing(Usuario::getPontos));
+		
+		Usuario maximaPontuacao = max.get();
+		System.out.println(maximaPontuacao);
+	}
+	
+	void ex20() {
+		List<Usuario> usuarios = ex();
+		
+		usuarios.stream()
+			.sorted(Comparator.comparing(Usuario::getNome))
+			.peek(System.out::println)
+			.collect(Collectors.toList());
+	}
+	
+	void ex19() {
+		List<Usuario> usuarios = ex();
+		
+		usuarios.stream()
+			.filter(u -> u.getPontos() > 100)
+			.peek(System.out::println)
+			.findAny();
+	}
+	
+	void ex18() {
+		List<Usuario> usuarios = ex();
+		
+		Optional<Usuario> usuario = usuarios
+				.stream()
+				.filter(u -> u.getPontos() > 100)
+				.findAny();
+		
+		System.out.println(usuario.get());
 	}
 	
 	void ex17() {
@@ -198,6 +272,7 @@ public class StreamsApp {
 	private List<Usuario> ex() {
 		return new ArrayList<Usuario>() {
 			{
+				add(new Usuario("Friedrich Gauss", 90));
 				add(new Usuario("Paulo Silveira", 150));
 				add(new Usuario("Rodrigo Turini", 120));
 				add(new Usuario("Guilherme Silva", 190));
@@ -209,7 +284,6 @@ public class StreamsApp {
 				add(new Usuario("Johnny Depp", 160));
 				add(new Usuario("Robert De Niro", 200));
 				add(new Usuario("Felipe Nunes ", 100));
-				add(new Usuario("Friedrich Gauss", 90));
 			}
 		};
 	}
