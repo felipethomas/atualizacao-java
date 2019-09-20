@@ -19,7 +19,25 @@ public class StreamsApp {
 	public static void main(String[] args) {
 		Supplier<StreamsApp> criadorDeApps = StreamsApp::new;
 		StreamsApp app = criadorDeApps.get();
-		app.ex24();
+		app.ex26();
+	}
+	
+	void ex26() {
+		List<Usuario> usuarios = ex();
+		
+		boolean hasModerator = usuarios
+				.stream()
+				.anyMatch(u -> u.isModerador());
+		
+		System.out.println(hasModerator);
+	}
+	
+	void ex25() {
+		List<Usuario> usuarios = ex();
+		
+		usuarios.stream()
+			.iterator()
+			.forEachRemaining(System.out::println);
 	}
 	
 	void ex24() {
