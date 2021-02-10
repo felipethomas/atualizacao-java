@@ -1,0 +1,19 @@
+Tópicos estudados:
+
+- java.util.function
+  - Consumer (é uma interface funcional que executa o que você achar interessante)
+  - Predicate (é uma interface funcional que permite testar objetos)
+
+- Lambda
+  - é uma maneira mais simples de implementar uma interface que só tem um único método
+
+- Interfaces funcionais
+  - uma interface que tem apenas um único método *abstrato*
+  - @FunctionalInterface
+  
+- Default Methods
+  - métodos implementados em interfaces (é isso mesmo!)
+  - foram adicionados para permitir que interfaces evoluam sem quebrar código existente
+  - forEach (Iterable; espera receber uma implementação da interface funcional Consumer)
+  - andThen (Consumer)
+  - removeIf (Collection; recebe uma implementação da interface funcional Predicate)
