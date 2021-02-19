@@ -1,19 +1,57 @@
 Tópicos estudados:
 
-- java.util.function
-  - Consumer (é uma interface funcional que executa o que você achar interessante)
-  - Predicate (é uma interface funcional que permite testar objetos)
-
-- Lambda
-  - é uma maneira mais simples de implementar uma interface que só tem um único método
-
 - Interfaces funcionais
   - uma interface que tem apenas um único método *abstrato*
   - @FunctionalInterface
-  
+
+- java.util.function
+  - Consumer (é uma interface funcional que executa o que você achar interessante)
+  - Predicate (é uma interface funcional que permite testar objetos)
+  - Function (é uma interface funcional que permite receber algo como argumento e produzir um resultado)
+  - ToIntFunction (evita boxing ao usar Function)
+  - BiFunction (é uma interface funcional que permite receber dois argumentos e produzir um resultado)
+  - ToIntBiFunction (evita boxing ao usar BiFunction)
+  - IntBinaryOperator (é uma interface funcional que permite receber dois argumentos do tipo int primitivo e produzir um resultado int primitivo)
+  - Supplier (é uma interface funcional para criar um novo objeto a partir de seu construtor default)
+
+- Lambda
+  - é uma maneira mais simples de implementar uma interface que só tem um único método abstrato (interface funcional)
+  - utilizamos as expressões lambda para simplificar o uso de funções de call-back (interfaces comumente instanciadas como classes anônimas)
+ 
 - Default Methods
   - métodos implementados em interfaces (é isso mesmo!)
   - foram adicionados para permitir que interfaces evoluam sem quebrar código existente
   - forEach (Iterable; espera receber uma implementação da interface funcional Consumer)
-  - andThen (Consumer)
+  - andThen (Consumer; espera receber uma implementação da interface funcional Consumer)
   - removeIf (Collection; recebe uma implementação da interface funcional Predicate)
+  - sort (List; recebe uma implementação da interface funcional Comparator)
+  - stream(Collection; não recebe argumento)
+
+- Comparators
+  - String.CASE_INSENSITIVE_ORDER.compare
+  - java.text.Collactors
+  - agora podemos ter métodos estáticos em interfaces (é isso mesmo!)
+  - Comparator.comparing
+  - Comparator.comparingInt
+  - Comparator.thenComparing
+  - Comparator.thenComparingInt
+  - Comparator.nullsLast
+  - Comparator.nullsFirst
+  - Comparator.reversed()
+  - palavras.sort(Comparator.naturalOrder())
+  - palavras.sort(Comparator.reverseOrder())
+
+- Method References
+  - classe, seguida do delimitador :: e o nome do método sem parênteses (Usuario::tornaModerador)
+  - da mesma forma como uma expressão lambda, o method reference é traduzido para uma interface funcional
+  - pode ser usado para chamar um método de uma instância
+  - podemos usar method reference com construtores default (Supplier<Usuario> criadorDeUsuarios = Usuario::new;)
+  - podemos usar method reference com construtores de um argumento (Function<String, Usuario> criadorDeUsuarios = Usuario::new;)
+  - podemos usar method reference com construtores de dois argumentos (BiFunction<String, Integer, Usuario> criadorDeUsuarios = Usuario::new;)
+
+- Streams
+  - é muito importante saber que o Stream não tem efeito colateral sobre a coleção que o originou
+  - o Stream então é uma outra coleção? Certamente não. Ele está mais próximo a um Iterator.
+  - o Stream é uma sequência de elementos que pode ser trabalhada de diversas formas
+  - o Stream é desenhado para que você utilize-o apenas uma vez
+  - filter(recebe um parâmetro do tipo Predicate<T> com um único método de teste)
