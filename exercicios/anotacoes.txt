@@ -14,6 +14,11 @@ Tópicos estudados:
   - IntBinaryOperator (é uma interface funcional que permite receber dois argumentos do tipo int primitivo e produzir um resultado int primitivo)
   - Supplier (é uma interface funcional para criar um novo objeto a partir de seu construtor default)
 
+- java.util.Optional (OptionalDouble, OptionalInt)
+  - ifPresent(valor -> janela.atualiza(valor))
+  - orElse(0.0)
+  - orElseThrow(IllegalStateException::new)
+
 - Lambda
   - é uma maneira mais simples de implementar uma interface que só tem um único método abstrato (interface funcional)
   - utilizamos as expressões lambda para simplificar o uso de funções de call-back (interfaces comumente instanciadas como classes anônimas)
@@ -48,10 +53,49 @@ Tópicos estudados:
   - podemos usar method reference com construtores default (Supplier<Usuario> criadorDeUsuarios = Usuario::new;)
   - podemos usar method reference com construtores de um argumento (Function<String, Usuario> criadorDeUsuarios = Usuario::new;)
   - podemos usar method reference com construtores de dois argumentos (BiFunction<String, Integer, Usuario> criadorDeUsuarios = Usuario::new;)
+  - ArrayList::new, ArrayList::add, ArrayList::addAll
 
 - Streams
   - é muito importante saber que o Stream não tem efeito colateral sobre a coleção que o originou
   - o Stream então é uma outra coleção? Certamente não. Ele está mais próximo a um Iterator.
   - o Stream é uma sequência de elementos que pode ser trabalhada de diversas formas
   - o Stream é desenhado para que você utilize-o apenas uma vez
-  - filter(recebe um parâmetro do tipo Predicate<T> com um único método de teste)
+  - se você invocar duas vezes usuarios.stream() não haverá problema, pois abrimos dois streams diferentes (um stream a cada invocação)
+  - filter (recebe um parâmetro do tipo Predicate<T> com um único método de teste)
+  - map(recebe um parâmetro do tipo Function e retorna um Stream)
+  - mapToInt(recebe um parâmetro do tipo ToIntFunction e retorna um IntStream)
+  - flatMap quando queremos que o resultado da nossa transformação seja reduzido a um Stream simples, sem composição
+  - average(não recebe parâmetro e retorna um OptionalDouble)
+  - max(recebe um Comparator e retorna um Optional<T>) Ex: max(Comparator.comparingInt(Usuario::getPontos))
+  - findAny (retorna qualquer elemento que encontrar no pipeline do stream)
+  - findFirst (retorna o primeiro elemento que encontrar no pipeline do stream)
+  - peek (o stream executa um tarefa toda vez que processar um elemento) Ex: peek(System.out::println)
+  - o método sorted é um método intermediário stateful (operações stateful podem precisar processar todo o stream mesmo que sua operação terminal não demande isso)
+  - operações que utilizam os elementos da stream para retornar um valor final são frequentemente chamadas de operações de redução
+  - iterator percorre os elementos de um Stream
+  - forEachRemaining(recebe um Consumer como parâmetro) percorre os elementos de um Iterator
+  - um motivo para usar um Iterator é quando queremos modificar os objetos de um Stream
+  - anyMatch(recebe um Predicate com parâmetro)
+  - allMatch(recebe um Predicate com parâmetro)
+  - noneMatch(recebe um Predicate com parâmetro)
+  - count() para saber quantos elementos há no Stream
+  - skip(recebe um long como parâmetro) para pular os n próximos elementos
+  - limit(recebe um long como parâmetro) para cortar n elementos
+  - Stream.empty() cria um Stream vazio
+  - Stream.of(T... values) cria um Stream com os elementos passados como parâmetro
+  - computeIfAbsent() vai chamar a Function do lambda no caso de não encontrar um valor para a chave e associar o resultado a essa mesma chave
+  - partitioningBy nada mais é do que uma versão mais eficiente para ser usada ao agrupar booleans
+  - streams paralelos são uma forma simples de realizar operações com a API de Fork/Join: o tamanho do input precisa ser grande.
+
+- Collectors
+  - existem vários Collectors prontos
+  - Collectors.toList()
+  - stream().collect(Collectors.toList())
+  - stream().collect(Collectors.toSet())
+  - stream().collect(Collectors.toMap())
+  - stream().collect(Collectors.joining())
+  - stream().collect(Collectors.toCollection(HashSet::new))
+  - fazer toCollection(HashSet::new) é o mesmo que toCollection(() -> new HashSet<Usuario>())
+  - stream().toArray(Usuario[]::new)
+
+
