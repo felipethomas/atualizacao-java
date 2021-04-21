@@ -98,4 +98,12 @@ Tópicos estudados:
   - fazer toCollection(HashSet::new) é o mesmo que toCollection(() -> new HashSet<Usuario>())
   - stream().toArray(Usuario[]::new)
 
-
+- java.time
+  - LocalDate representa uma data sem horário nem timezone, por exemplo 25-01-2014
+  - Se as informações de horário forem importantes, usamos a classe LocalDateTime
+  - LocalTime para representar apenas as horas
+  - Enquanto um Period considera as medidas de data (dias, meses e anos), a Duration considera as medidas de tempo (horas, minutos, segundos etc.)
+  - LocalDate.of
+  - Period.of
+  - DateTimeFormatter.ofPattern("dd/MM/yyyy")
+  - enum ChronoUnit
